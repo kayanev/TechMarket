@@ -1,25 +1,45 @@
-"""Atributos: id_usuario, nome, email, senha, tipo_permissao.
-Métodos: autenticar(), alterar_senha(), obter_dados_perfil().
-"""
 
+# Classe feita por autoria de: Kayane
 class Usuario:
     def __init__(self, id_usuario, nome, email, senha, tipo_permissao):
-        self.id_usuario = "01"
-        self.nome = "admin"
-        self.email = "admin@gmail.com"
-        self.senha = "admin"
+        self.id_usuario = id_usuario
+        self.nome = nome
+        self.email = email
+        self.__senha = senha
         self.tipo_permissao = tipo_permissao
 
-    def menu(self):
-        inserir_nome = input("Insira o seu nome cadastrado aqui!")
+    def autenticar(self, senha_informada):
+        self.__senha_informada = senha_informada
+        if not self.__senha_informada:
+            return False
         
+        return self.__senha == self.__senha_informada.strip()
 
-    def autenticar():
-        
+    def alterar_senha(self, nova_senha):
+        self.__nova_senha = nova_senha
+        if self.__nova_senha and len(self.__nova_senha.strip()) > 0:
+            self.__senha = self.__nova_senha.strip()
+            print(f"Sua nova senha é: {self.__senha}")
+            return True
 
-    def alterar_senha():
-        pass
+        return False
 
-    def obter_dados_perfil():
-        pass
+    def obter_dados_perfil(self):
+        return f"Nome:{self.nome}\nE-mail:{self.email}\nPermissão:{self.tipo_permissao}"
 
+    def __repr__(self):
+        return f"<Usuario ID={self.id_usuario} Nome='{self.nome}' Permissao='{self.tipo_permissao}'>"
+
+usuario_admin_padrao = Usuario("01", "admin", "admin@gmail.com","admin", "Administrador")
+
+print("=== TELA DE LOGIN ===")
+usuario_informado = input("Insira seu usuario para autenticação: ")
+senha_informada = input("Digite sua senha para autenticação: ")
+
+if usuario_informado == usuario_admin_padrao.nome and usuario_admin_padrao.autenticar(senha_informada): 
+    print(" Login efetuado com sucesso!") 
+else: 
+    print(" Usuário ou senha incorretos.")
+
+usuario_admin_padrao.alterar_senha("baleia")
+print(usuario_admin_padrao.obter_dados_perfil())
