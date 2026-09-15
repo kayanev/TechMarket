@@ -1,4 +1,10 @@
 
+# Atalho no VS Code: Ctrl+Shift+B roda o Flask com debug (uv run flask --app main run --debug)
+
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
 # Classe feita por autoria de: Kayane
 class Usuario:
     def __init__(self, id_usuario, nome, email, senha, tipo_permissao):
@@ -43,3 +49,12 @@ else:
 
 usuario_admin_padrao.alterar_senha("baleia")
 print(usuario_admin_padrao.obter_dados_perfil())
+
+@app.route("/", methods=["GET"])
+def home():
+    """Renderiza a pagina principal."""
+    return render_template("index.html")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
