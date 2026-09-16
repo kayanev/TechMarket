@@ -1,0 +1,103 @@
+from classeproduto import *
+
+#Feito por Manuela Cardozo
+class CarrinhoCompras:
+    def __init__(self):
+        self.itens = []
+        self.valor_total = 0.0
+        self.status_compra = "aberta"
+
+    def adicionar_item(self, item):
+        if self.status_compra == "aberta":
+            self.itens.append(item)
+        else:
+            print("O carrinho já foi finalizado.")
+        
+    def remover_item(self, item):
+        if item in self.itens:
+            self.itens.remove(item)
+            print(f"'{item.nome}' removido do carrinho.")
+        else:
+            print("Produto não encontrado no carrinho.")
+
+    def calcular_total(self):
+        total = sum(item.preco for item in self.itens)
+        return total
+
+    def listar_itens(self):
+        if not self.itens:
+            return "Carrinho vazio."
+
+        return [item.nome for item in self.itens]
+    
+    def finalizar_compra(self):
+        if self.status_compra == "aberta":
+            self.status_compra = "finalizada"
+            total = self.calcular_total()
+            print(f"A compra já foi finalizada. Total: R$ {total:.2f}")
+        else:
+            return "A compra já foi finalizada."
+
+#feito por Adrian Jacob e Kayane Balielo
+estoque = []
+carrinho = CarrinhoCompras()
+
+while True:
+    print("\n=== MEU CARRINHO ===")
+    print("1 - Adicionar Novo Produto")
+    print("2 - Listar estoque")
+    print("3 - Adicionar prooduto ao carrinho")
+    print("4 - Ver Carrinho e Total")
+    print("5 - Finalizar Compra")
+    print("0 - Sair")
+    
+    opcao = input("Escolha uma opção: ")
+
+    if opcao == "1":
+        nome = input("\nNome do produto: ")
+        preco = float(input("Preço: R$ "))
+        qtd = int(input("Quantidade inicial: "))
+        categoria = input("Categoria: ")
+        
+        novo_produto = Produto(nome, preco, qtd, categoria)
+        estoque.append(novo_produto)
+        print(f"'{nome}' cadastrado com sucesso!")
+
+    elif opcao == "2":
+        print("\n--- ESTOQUE ---")
+        if not estoque:
+            print("Nenhum produto cadastrado.")
+        else:
+            for p in estoque:
+                print(p)
+
+    elif opcao == "3":
+        nome_busca = input(
+            "\nDigite o nome do produto para colocar no carrinho: "
+        )
+        encontrado = None
+
+        for prod in estoque:
+            if prod.nome.lower() == nome_busca.lower():
+                encontrado = prod
+                break
+
+        if encontrado:
+            carrinho.adicionar_item(encontrado)
+        else:
+            print("Produto não encontrado no estoque.")
+
+    elif opcao == "4":
+        print("\n--- ITENS NO CARRINHO ---")
+        print(carrinho.listar_itens())
+        print(f"Total atual: R$ {carrinho.calcular_total():.2f}")
+
+    elif opcao == "5":
+        print(carrinho.finalizar_compra())
+
+    elif opcao == "0":
+        print("\nSaindo do programa...")
+        break
+
+    else:
+        print("Opção inválida! Tente novamente.")
