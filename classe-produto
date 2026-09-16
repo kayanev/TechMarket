@@ -1,0 +1,19 @@
+# Autor: Adrian Jacob
+class Produto:
+    def __init__(self, nome, preco, quantidade, categoria):
+        self.nome = nome
+        self.preco = preco
+        self.quantidade = quantidade
+        self.categoria = categoria
+
+    def adicionar_estoque(self, quantidade):
+        self.quantidade += quantidade
+
+    def remover_estoque(self, quantidade):
+        if quantidade <= self.quantidade:
+            self.quantidade -= quantidade
+        else:
+            print("Quantidade insuficiente em estoque.")
+
+    def __str__(self):
+        return f"Produto: {self.nome} | Preço: R${self.preco:.2f} | Quantidade: {self.quantidade} | Categoria: {self.categoria}"
