@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Knewave&family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap" rel="stylesheet">
+    
+    
+    
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        #cabecalho {
+            background-color: #89CAD9;
+            padding: 20px 0;
+            position: relative;
+        }
+        h1 {
+            font-family: 'Knewave', sans-serif;
+            color: aliceblue;
+            text-align: center;
+            font-size: 100px;
+            margin: 0;
+        }
+        .icone-banner {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-40%);
+            height: 220px;
+            width: auto;
+            z-index: 10;
+        }
+        .login_box {
+            width: 590px;
+            background: #fffef8;
+            border: 4px solid #89CAD9;
+            border-radius: 25px;
+            padding: 35px 45px;
+            text-align: center;
+            box-shadow: 10px 10px 0px #89CAD9;
+            margin: 40px auto;
+            box-sizing: border-box; 
+        }
+        .icone-banner-box {
+            width: 250px;
+            margin-bottom: 5px;
+        }
+        h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+            font-family: 'Playpen Sans', sans-serif;
+            color: #3a8c9e;
+        }
+        .login_box > p {
+            margin-bottom: 25px;
+            font-size: 17px;
+            font-family: 'Playpen Sans', sans-serif;
+            color: #3a8c9e;
+        }
+
+        .input-container {
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .input-container input {
+            width: 100%;
+            padding: 15px 20px 15px 45px;
+            font-family: 'Playpen Sans', sans-serif;
+            font-size: 16px;
+            border: 2px solid #89CAD9;
+            border-radius: 12px;
+            outline: none;
+            box-sizing: border-box;
+            color: #555;
+            background-color: #fff;
+        }
+
+        .input-container .input-senha {
+            padding-right: 45px;
+        }
+
+        .input-container .img-icone {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 40px; 
+            width: auto;
+        }
+
+        .input-container .icone-principal {
+            pointer-events: none;
+        }
+
+        .input-container .icone-olho {
+            right: 18px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="cabecalho">
+        <h1>MUCHIIKO</h1>
+        <img src="static/icon.png" alt="Gatinho" class="icone-banner">
+    </div>
+
+    <div class="login_box">
+        <img src="static/download.png" alt="Gatinho2" class="icone-banner-box">
+        <h2>Bem-vindo admin!</h2>
+        <p>Faça login para continuar</p>
+        
+        <form>
+            <div class="input-container">
+                <img src="static/canvas.png" alt="Usuário" class="img-icone icone-principal">
+                <input type="text" placeholder="Usuário ou e-mail">
+            </div>
+
+            
+            <div class="input-container">
+                <i class="fa-regular fa-envelope"></i>
+                <input type="email" name="email" placeholder="E-mail">
+            </div>
+
+            
+<!-- Campo de Senha -->
+            <div class="input-container">
+                <!-- Substitua pelo nome do seu arquivo de imagem de cadeado -->
+                <img src="static/adeados.png" alt="Senha" class="img-icone icone-principal">
+                <input type="password" class="input-senha" placeholder="Senha">
+                <!-- Substitua pelo nome do seu arquivo de imagem do olho -->
+                <img src="static/olhu.png" alt="Ver senha" class="img-icone icone-olho">
+            </div>
+
+            
+            <div class="input-container">
+                <i class="fa-solid fa-id-card"></i>
+                <input type="number" name="id" placeholder="ID do usuário">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
