@@ -1,31 +1,48 @@
+{# Feito por: Kayane Balielo #}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja Muchiko</title>
+    <title>Muchiko - Vitrine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Vitrine de Produtos</h1>
-    
-    {% if mensagem %}
-        <p style="color: rgb(#89CAD9);"><strong>{{ mensagem }}</strong></p>
-    {% endif %}
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='icon.webp') }}" alt="Logo Muchiko" class="logo-icon" onerror="this.style.display='none'">
+            <h1 class="logo-title">MUCHIKO</h1>
+        </div>
+        <nav>
+            <a href="/carrinho">🛒 Meu Carrinho</a>
+        </nav>
+    </header>
 
-    {% for produto in lista_produto %}
-        <td>{{ produto.id_produto }}</td>
-        <td>{{ produto.nome }}</td>
-        <td>R$ {{ "%.2f"|format(produto.preco\_unitario) }}</td>
-        <td>{{ produto.quantidade_estoque }}</td>
-    
-    <form auction="/adicionar_carrinho" method="POST"></form>
-        <input type="hidden" name="id_produto" value="{{ produto.id_produto }}">
-        <input type="number" name="quantidade" value="1" min="1" max="{{ produto.quantidade_estoque}}">
-        <button type="submit" {% if not produto.esta_disponivel() %}disabled{% endif %}>
-        {% if produto.esta_disponivel() %}Adicionar ao Carrinho{% else %}Esgotado{% endif %}
-    </button>
-</form>
+    <div class="container">
+        <h2 class="page-title">Vitrine de Produtos</h2>
+        
+        {% if mensagem %}
+            <div class="alert-msg">{{ mensagem }}</div>
+        {% endif %}
 
+        <div class="product-grid">
+            {% for produto in lista_produtos %}
+            <div class="product-card">
+                <div>
+                    <span class="category-tag">{{ produto.categoria }}</span>
+                    <div class="product-name">{{ produto.nome }}</div>
+                    <div class="product-price">R$ {{ "%.2f"|format(produto.preco_unitario) }}</div>
+                </div>
 
+                <form action="/adicionar_carrinho" method="POST" class="card-actions">
+                    <input type="hidden" name="id_produto" value="{{ produto.id_produto }}">
+                    <input type="number" name="quantidade" class="qty-input" value="1" min="1" max="{{ produto.quantidade_estoque }}">
+                    <button type="submit" class="btn-primary" {% if not produto.esta_disponivel() %}disabled{% endif %}>
+                        {% if produto.esta_disponivel() %}Adicionar ao Carrinho{% else %}Esgotado{% endif %}
+                    </button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
-</html> 
+</html>
