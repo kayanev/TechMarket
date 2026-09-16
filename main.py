@@ -49,7 +49,7 @@ usuario_admin_padrao = Usuario(
     "Administrador"
 )
 
-
+#Rota feita por autroria de Manuela
 @app.route("/", methods=["GET", "POST"])
 def home():
 
